@@ -60,3 +60,7 @@
 ;; Rainbow-delimiters config
 (require 'rainbow-delimiters)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
+;; Python jedi hook auto completion in python
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
