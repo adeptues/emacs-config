@@ -20,7 +20,6 @@
 		      jedi
 		      rainbow-delimiters))
 
-
 ;;only connects to melp once per boot, so as to avoid bad networks and
 ;;hanging when emacs starts up
 ;;TODO crude elisp tidy up
@@ -39,7 +38,6 @@
 
 ;; set cursor color color for wombat theme compatbility
 ;;(set-cursor-color "#e0ffff")
-
 
 ;; Mode configuration
 
@@ -61,6 +59,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scala.html\\'" . web-mode))
+
 ;;force engine associations for web mode non default
 (setq web-mode-engines-alist
       '(("razor"    . "\\.scala.html\\'"))
@@ -75,3 +74,7 @@
  (setenv "mail.hssnet.com" "pop3server")
  (setq rmail-primary-inbox-list '("po:thomas.helmkay")
        rmail-pop-password-required t)
+
+;; Python jedi hook auto completion in python
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
