@@ -11,6 +11,7 @@
 ;;packages to install if not installed
 (defvar my-packages '(starter-kit-lisp
 		      js2-mode
+                      ac-js2
 		      scala-mode2
 		      sr-speedbar ;;file browser sidebar
 		      ensime
@@ -44,6 +45,9 @@
 ;; js2-mode configuration for javscript
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist (cons (rx ".js" eos) 'js2-mode))
+;; auto completion for javascript
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq ac-js2-evaluate-calls t)
 
 ;;speedbar configfor sr-speedbar
  (require 'sr-speedbar)
