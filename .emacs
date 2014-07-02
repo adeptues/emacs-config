@@ -19,6 +19,7 @@
 		      clojure-mode
 		      cider
 		      jedi
+                      color-theme-solarized
 		      rainbow-delimiters))
 
 ;;only connects to melp once per boot, so as to avoid bad networks and
@@ -35,7 +36,7 @@
 ;; Emacs config section
 
 ;; set emacs theme wombat is a dark theme
-;;(load-theme 'wombat t)
+(load-theme 'solarized-light t)
 
 ;; set cursor color color for wombat theme compatbility
 ;;(set-cursor-color "#e0ffff")
@@ -82,3 +83,15 @@
 ;; Python jedi hook auto completion in python
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
+
+;; Custom code
+;; useful for flattening text in scratch reduces text to one line
+(defun remove-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match "" nil t))))
+;; bind to f8
+(global-set-key [f8] 'remove-newlines-in-region)
