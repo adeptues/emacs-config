@@ -11,6 +11,7 @@
 ;;packages to install if not installed
 (defvar my-packages '(starter-kit-lisp
 		      js2-mode
+                      auto-complete
                       ac-js2
 		      scala-mode2
 		      sr-speedbar ;;file browser sidebar
@@ -19,8 +20,9 @@
 		      clojure-mode
 		      cider
 		      jedi
-                      color-theme-solarized
-		      rainbow-delimiters))
+		      rainbow-delimiters
+                      flycheck
+                      auto-complete-clang))
 
 ;;only connects to melp once per boot, so as to avoid bad networks and
 ;;hanging when emacs starts up
@@ -36,12 +38,20 @@
 ;; Emacs config section
 
 ;; set emacs theme wombat is a dark theme
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 ;; set cursor color color for wombat theme compatbility
 ;;(set-cursor-color "#e0ffff")
 
 ;; Mode configuration
+
+;;auto complete configuration THIS IS A FUCKING MESS
+(require 'auto-complete-config)
+(ac-config-default)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(require 'auto-complete)
+(add-to-list 'ac-modes 'c++-mode)
+(require auto-complete-clang)
 
 ;; js2-mode configuration for javscript
 (require 'js2-mode)
@@ -84,6 +94,9 @@
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
 
+;;flycheck config
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;; Custom code
 ;; useful for flattening text in scratch reduces text to one line
 (defun remove-newlines-in-region ()
@@ -95,3 +108,17 @@
     (while (search-forward "\n" nil t) (replace-match "" nil t))))
 ;; bind to f8
 (global-set-key [f8] 'remove-newlines-in-region)
+
+;;random autogenshit
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
