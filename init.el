@@ -11,3 +11,10 @@
 
 ;;packages to install if not installed
 (defvar my-packages '(starter-kit-lisp))
+;; refresh package contents
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
