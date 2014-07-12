@@ -36,5 +36,15 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 
 ;;flycheck config
+(require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; Auto-complete configuration
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+(require 'auto-complete-clang)
+(add-hook 'c++-mode-hook 'ac-complete-clang)
+(provide 'modes)
+;;; modes.el ends here

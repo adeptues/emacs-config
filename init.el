@@ -4,9 +4,9 @@
 ;; previous dead version was the .emacs file which is no longer used
 ;; configure package managment
 (require 'package)
-(add-to-list 'package-archives;;TODO find out how to use both
-;;             '("marmalade" . "http://marmalade-repo.org/packages/")
-	     '("melpa" . "http://melpa.milkbox.net/packages/") )
+(dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
+                  ("marmalade" . "http://marmalade-repo.org/packages/")))
+  (add-to-list 'package-archives source))
 (package-initialize)
 
 ;;packages to install if not installed
@@ -19,8 +19,11 @@
 		      cider
 		      jedi
 		      rainbow-delimiters
-                      flycheck
-                      color-theme-solarized))
+                      f
+;;                      flycheck dumped cos of homosexuality
+                      color-theme-solarized
+                      auto-complete
+                      auto-complete-clang))
 
 ;; refresh package contents
 (when (not package-archive-contents)
@@ -30,6 +33,7 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/flycheck-0.19"))
 ;; set emacs theme wombat is a dark theme
 (load-theme 'solarized-dark t)
 
