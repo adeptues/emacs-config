@@ -38,6 +38,11 @@
 ;;flycheck config
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'c++-mode-hook;;combine hooks
+          (lambda () (setq flycheck-clang-include-path
+                      (list "/usr/include/wx-2.8/"))))
+(add-hook 'c++-mode-hook
+          (lambda () (setq flycheck-clang-language-standard "c++11")))
 
 ;; Auto-complete configuration
 (require 'auto-complete)
@@ -46,5 +51,8 @@
 
 (require 'auto-complete-clang)
 (add-hook 'c++-mode-hook 'ac-complete-clang)
+
+(require 'cmake-mode)
+
 (provide 'modes)
 ;;; modes.el ends here

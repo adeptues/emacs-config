@@ -23,7 +23,8 @@
 ;;                      flycheck dumped cos of homosexuality
                       color-theme-solarized
                       auto-complete
-                      auto-complete-clang))
+                      auto-complete-clang
+                      cmake-mode))
 
 ;; refresh package contents
 (when (not package-archive-contents)
