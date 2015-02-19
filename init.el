@@ -24,7 +24,8 @@
                       color-theme-solarized
                       auto-complete
                       auto-complete-clang
-                      cmake-mode))
+                      cmake-mode
+                      markdown-mode))
 
 ;; refresh package contents
 (when (not package-archive-contents)
@@ -35,6 +36,9 @@
     (package-install p)))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/flycheck-0.19"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/emacs-livedown"))
+
+
 ;; set emacs theme wombat is a dark theme
 (load-theme 'solarized-dark t)
 
@@ -49,4 +53,3 @@
 ;;(load-user-file "modes.el")
 (load-user-files (list "utils.el"
                        "modes.el"))
-

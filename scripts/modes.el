@@ -54,5 +54,19 @@
 
 (require 'cmake-mode)
 
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(require 'markdown-mode)
+
+;; Configure markdown previewer
+(custom-set-variables
+ '(livedown:autostart nil) ; automatically open preview when opening markdown files 
+ '(livedown:open t)        ; automatically open the browser window
+ '(livedown:port 1337))    ; port for livedown server
+(require 'livedown)
+
 (provide 'modes)
 ;;; modes.el ends here
