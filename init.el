@@ -39,8 +39,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/emacs-livedown"))
 
 
-;; set emacs theme wombat is a dark theme
-(load-theme 'solarized-dark t)
+;; set emacs theme wombat is a dark theme Doesnt work on aquamacs osx
+;;(load-theme 'solarized-dark t)
 
 ;; File loading functions
 

@@ -8,3 +8,4 @@ places
 *.tar
 *.dat
 session.*
+SessionDesktop.el
