@@ -9,3 +9,5 @@ places
 *.dat
 session.*
 SessionDesktop.el
+recentf
+ido.last

@@ -25,7 +25,9 @@
                       auto-complete
                       auto-complete-clang
                       cmake-mode
-                      markdown-mode))
+                      markdown-mode
+                      rust-mode
+                      haskell-mode))
 
 ;; refresh package contents
 (when (not package-archive-contents)

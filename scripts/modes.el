@@ -68,5 +68,13 @@
  '(livedown:port 1337))    ; port for livedown server
 (require 'livedown)
 
+;; Rust mode settings
+(require 'rust-mode)
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+;; Haskell mode config
+(require 'haskell-mode)
+
 (provide 'modes)
 ;;; modes.el ends here
