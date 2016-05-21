@@ -27,7 +27,8 @@
                       cmake-mode
                       markdown-mode
                       rust-mode
-                      haskell-mode))
+                      haskell-mode
+                      lua-mode))
 
 ;; refresh package contents
 (when (not package-archive-contents)

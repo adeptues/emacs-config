@@ -75,6 +75,7 @@
 
 ;; Haskell mode config
 (require 'haskell-mode)
-
+;; lua config
+(require 'lua-mode)
 (provide 'modes)
 ;;; modes.el ends here
