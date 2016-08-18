@@ -12,7 +12,7 @@
 ;;packages to install if not installed
 (defvar my-packages '(starter-kit-lisp
 		      js2-mode
-		      scala-mode2
+		      ;; scala-mode2
 		      ensime
 		      web-mode
 		      clojure-mode
@@ -28,7 +28,8 @@
                       markdown-mode
                       rust-mode
                       haskell-mode
-                      lua-mode))
+                      lua-mode
+                      tidy))
 
 ;; refresh package contents
 (when (not package-archive-contents)

@@ -77,5 +77,20 @@
 (require 'haskell-mode)
 ;; lua config
 (require 'lua-mode)
+
+;; HTML Tidy config
+
+(autoload 'tidy-buffer "tidy" "Run Tidy HTML parser on current buffer" t)
+(autoload 'tidy-parse-config-file "tidy" "Parse the `tidy-config-file'" t)
+(autoload 'tidy-save-settings "tidy" "Save settings to `tidy-config-file'" t)
+(autoload 'tidy-build-menu  "tidy" "Install an options menu for HTML Tidy." t)
+
+;; Sets up tidy for html mode with a hook
+(defun my-html-mode-hook () "Customize my html-mode."
+  (tidy-build-menu html-mode-map)
+  (local-set-key [(control c) (control c)] 'tidy-buffer)
+  (setq sgml-validate-command "tidy"))
+(require 'tidy)
+
 (provide 'modes)
 ;;; modes.el ends here
