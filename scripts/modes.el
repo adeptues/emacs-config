@@ -92,5 +92,15 @@
   (setq sgml-validate-command "tidy"))
 (require 'tidy)
 
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(require 'ansible)
+(add-hook 'yaml-mode-hook '(lambda () (ansible 1)))
+
+;; Rust config
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
+;;Sets the auto line wrap distance
+(setq-default fill-column 80)
 (provide 'modes)
 ;;; modes.el ends here

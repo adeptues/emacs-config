@@ -29,7 +29,10 @@
                       rust-mode
                       haskell-mode
                       lua-mode
-                      tidy))
+                      tidy
+                      ansible
+                      flycheck
+                      flycheck-rust))
 
 ;; refresh package contents
 (when (not package-archive-contents)
@@ -39,7 +42,7 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/flycheck-0.19"))
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/flycheck-0.19"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/emacs-livedown"))
 
 
@@ -55,5 +58,6 @@
     (load-file path)))
 
 ;;(load-user-file "modes.el")
-(load-user-files (list "utils.el"
+(load-user-files (list "yaml-mode.el"
+                       "utils.el"
                        "modes.el"))

@@ -11,3 +11,4 @@ session.*
 SessionDesktop.el
 recentf
 ido.last
+.#recentf
