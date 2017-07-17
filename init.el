@@ -32,7 +32,9 @@
                       tidy
                       ansible
                       flycheck
-                      flycheck-rust))
+                      flycheck-rust
+                      tide
+                      company))
 
 ;; refresh package contents
 (when (not package-archive-contents)
