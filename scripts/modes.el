@@ -123,6 +123,9 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
+;; Set keybind M - Enter to tide-fix command
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-RET") `tide-fix)))
 (provide 'modes)
 ;;; modes.el ends here
