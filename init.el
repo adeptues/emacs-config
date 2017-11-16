@@ -34,7 +34,8 @@
                       flycheck
                       flycheck-rust
                       tide
-                      company))
+                      company
+                      monokai-theme))
 
 ;; refresh package contents
 (when (not package-archive-contents)
@@ -50,7 +51,7 @@
 
 ;; set emacs theme wombat is a dark theme Doesnt work on aquamacs osx
 ;;(load-theme 'solarized-dark t)
-
+(load-theme 'monokai t)
 ;; File loading functions
 
 (defun load-user-files (files)
