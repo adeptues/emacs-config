@@ -3,6 +3,15 @@
 
 ;; Mode Configuration
 
+(require 'smex)
+;; For some reason the starter kit stoped setting up smex for M-x auto
+;; comlete
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 ;; js2-mode configuration for javscript
 (require 'js2-mode)
 ;;(require 'ac-js2-mode)
@@ -30,7 +39,8 @@
 ;; Rainbow-delimiters config
 (require 'rainbow-delimiters)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+;;(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 ;; Python jedi hook auto completion in python
 (require 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
@@ -48,7 +58,7 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
-
+;;TODO replace auto-complete with company mode and company-quickhelp
 (require 'auto-complete-clang)
 (add-hook 'c++-mode-hook 'ac-complete-clang)
 
@@ -66,12 +76,18 @@
  '(livedown:autostart nil) ; automatically open preview when opening markdown files 
  '(livedown:open t)        ; automatically open the browser window
  '(livedown:port 1337))    ; port for livedown server
+;;TODO remove live down as its not really needed nor useful and does to much for
+;;normal dev like spinning up  aserver 
 (require 'livedown)
+
 
 ;; Rust mode settings
 (require 'rust-mode)
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+(add-hook 'rust-mode-hook #'flycheck-mode)
+;;TODO LSP Mode and Racer and Clippy
+;; End rust config
 
 ;; Haskell mode config
 (require 'haskell-mode)
@@ -79,7 +95,7 @@
 (require 'lua-mode)
 
 ;; HTML Tidy config
-
+;;TODO this needs reconfiguring and support adding for custom html tags ala webcomponents
 (autoload 'tidy-buffer "tidy" "Run Tidy HTML parser on current buffer" t)
 (autoload 'tidy-parse-config-file "tidy" "Parse the `tidy-config-file'" t)
 (autoload 'tidy-save-settings "tidy" "Save settings to `tidy-config-file'" t)
@@ -123,9 +139,21 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; add typescript tsx formatting to webmode using tide
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
 ;; Set keybind M - Enter to tide-fix command
 (add-hook 'typescript-mode-hook
           (lambda ()
             (local-set-key (kbd "M-RET") `tide-fix)))
+
 (provide 'modes)
 ;;; modes.el ends here

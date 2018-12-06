@@ -12,3 +12,5 @@ SessionDesktop.el
 recentf
 ido.last
 .#recentf
+eshell
+smex-items
