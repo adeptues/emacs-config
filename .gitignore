@@ -2,6 +2,7 @@
 *~
 #*
 *#
+.#*
 elpa
 .smex-items
 places
@@ -14,3 +15,6 @@ ido.last
 .#recentf
 eshell
 smex-items
+games
+network-security.data
+.lsp-session*

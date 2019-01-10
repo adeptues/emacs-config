@@ -41,9 +41,18 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 ;;(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-;; Python jedi hook auto completion in python
+
+;; Python mode configuration
+;; The following packages should be installed via pip for this to work best
+;; jedi,pyls,rope autopep8,pyflakes
+;; modes required for python configuration
 (require 'jedi)
+(require 'lsp-mode)
+;; jedi provides auto completion in python
 (add-hook 'python-mode-hook 'jedi:setup)
+;; Enable the language server protocol
+(add-hook 'python-mode-hook #'lsp)
+;; end python configuration
 
 ;;flycheck config
 (require 'flycheck)
@@ -80,14 +89,21 @@
 ;;normal dev like spinning up  aserver 
 (require 'livedown)
 
+;; Language server protocol config for languages that support it not all
+;; languages need lsp-mode as some have better bespoke tooling. lsp-mnode is for
+;; when theres existing tooling for other ides that support lsp protocol for
+;; better integration
+(require 'lsp-mode)
+
 
 ;; Rust mode settings
 (require 'rust-mode)
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-(add-hook 'rust-mode-hook #'flycheck-mode)
+
 ;;TODO LSP Mode and Racer and Clippy
 ;; End rust config
+
 
 ;; Haskell mode config
 (require 'haskell-mode)
