@@ -13,9 +13,9 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; js2-mode configuration for javscript
-(require 'js2-mode)
+;;(require 'js2-mode)
 ;;(require 'ac-js2-mode)
-(add-to-list 'auto-mode-alist (cons (rx ".js" eos) 'js2-mode))
+;;(add-to-list 'auto-mode-alist (cons (rx ".js" eos) 'js2-mode))
 ;; auto completion for javascript
 ;;(add-hook 'js2-mode-hook 'ac-js2-mode)
 ;;(setq ac-js2-evaluate-calls t)
@@ -50,28 +50,30 @@
 (require 'lsp-mode)
 ;; jedi provides auto completion in python
 (add-hook 'python-mode-hook 'jedi:setup)
-;; Enable the language server protocol
-(add-hook 'python-mode-hook #'lsp)
+(when (>= emacs-major-version 26)
+  (add-hook 'python-mode-hook #'lsp))
+
 ;; end python configuration
 
 ;;flycheck config
 (require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'c++-mode-hook;;combine hooks
-          (lambda () (setq flycheck-clang-include-path
-                      (list "/usr/include/wx-2.8/"))))
-(add-hook 'c++-mode-hook
-          (lambda () (setq flycheck-clang-language-standard "c++11")))
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; Auto-complete configuration
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-;;TODO replace auto-complete with company mode and company-quickhelp
-(require 'auto-complete-clang)
-(add-hook 'c++-mode-hook 'ac-complete-clang)
+;; (add-hook 'c++-mode-hook ;;combine hooks
+;;           (lambda () (setq flycheck-clang-include-path
+;;                       (list "/usr/include/wx-2.8/"))))
+;; (add-hook 'c++-mode-hook
+;;           (lambda () (setq flycheck-clang-language-standard "c++11")))
 
-(require 'cmake-mode)
+;; ;; Auto-complete configuration
+;; (require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; ;;TODO replace auto-complete with company mode and company-quickhelp
+;; (require 'auto-complete-clang)
+;; (add-hook 'c++-mode-hook 'ac-complete-clang)
+
+;; (require 'cmake-mode)
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
@@ -130,7 +132,7 @@
 (add-hook 'yaml-mode-hook '(lambda () (ansible 1)))
 
 ;; Rust config
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+;;(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;;Sets the auto line wrap distance
 (setq-default fill-column 80)
