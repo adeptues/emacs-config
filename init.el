@@ -3,6 +3,12 @@
 ;; C-M x to evaluate forms inside emacs
 ;; previous dead version was the .emacs file which is no longer used
 
+;; fix some issues with ido-ubiquitous before we load the it from packages needs
+;; to be at the top for some reason
+(defvar ido-cur-item nil)
+(defvar ido-default-item nil)
+(defvar ido-cur-list nil)
+
 ;; configure package managment
 (require 'package)
 (dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
@@ -58,10 +64,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; fix some issues with ido-ubiquitous before we load the it from packages
-(defvar ido-cur-item nil)
-(defvar ido-default-item nil)
-(defvar ido-cur-list nil)
+
 ;; fetch and install the packages
 (dolist (p my-packages)
   (when (not (package-installed-p p))
