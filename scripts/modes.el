@@ -158,6 +158,11 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; Set keybind M - Enter to tide-fix command
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-RET") `tide-fix)))
+;; End typescript dev config
 
 ;; add typescript tsx formatting to webmode using tide
 (require 'web-mode)
@@ -169,10 +174,10 @@
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
-;; Set keybind M - Enter to tide-fix command
-(add-hook 'typescript-mode-hook
-          (lambda ()
-            (local-set-key (kbd "M-RET") `tide-fix)))
+;; Configure find-file-in-project which is included by starterkitlisp package
+(setq ffip-use-rust-fd t)
+(global-set-key (kbd "C-x C-S-F") 'find-file-in-project)
+
 
 (provide 'modes)
 ;;; modes.el ends here
