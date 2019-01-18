@@ -138,6 +138,7 @@
 (setq-default fill-column 80)
 
 ;; Tide typescript configuration
+(require 'tide)
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)

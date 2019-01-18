@@ -2,11 +2,12 @@
 ;; By Thomas Helmkay
 ;; C-M x to evaluate forms inside emacs
 ;; previous dead version was the .emacs file which is no longer used
+
 ;; configure package managment
 (require 'package)
 (dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
-;;		  ("melpa-stable" . "https://stable.melpa.org/packages/")
                   ("marmalade" . "http://marmalade-repo.org/packages/")
+		  ("melpa-stable" . "https://stable.melpa.org/packages/")
 		  ))
   (add-to-list 'package-archives source))
 (package-initialize)
@@ -42,6 +43,12 @@
 		      ;; company-lsp
 		      ;; lsp-ui
 		      ))
+;; Pinned packages, packages we want to install from a specific package archive
+;; usually stable rather than the melpa snapshot which has more packages but can
+;; be unstable somtimes
+(setq package-pinned-packages '((flycheck . "melpa-stable")
+                                (tide . "melpa-stable")))
+
 
 ;; support for lsp-mode when emacs > 26
 (when (>= emacs-major-version 26)
@@ -51,6 +58,11 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+;; fix some issues with ido-ubiquitous before we load the it from packages
+(defvar ido-cur-item nil)
+(defvar ido-default-item nil)
+(defvar ido-cur-list nil)
+;; fetch and install the packages
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -78,20 +90,7 @@
                        "modes.el"
 		       "dom.el"))
 
-;; fix some shit errors with ido mode seems to be included by default
-(if (not (boundp 'ido-cur-item))
-    (setq-default ido-cur-item 123))
-
-(if (not (boundp 'ido-default-item))
-    (setq-default ido-default-item 123))
-
-(if (not (boundp 'ido-cur-list))
-    (setq-default ido-cur-list 123))
-
-
-
 ;; No idea what this is below here its auto generated
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
