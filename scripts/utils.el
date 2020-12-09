@@ -8,6 +8,15 @@
 ;; useful for flattening text in scratch reduces text to one line
 
 ;;; Code:
+
+(defun make-csv ()
+  "make a csv of a bunch of lines"
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match "," nil t))))
+
 (defun remove-newlines-in-region ()
   "Remove all newlines in the region."
   (interactive)
@@ -15,6 +24,8 @@
     (narrow-to-region (point) (mark))
     (goto-char (point-min))
     (while (search-forward "\n" nil t) (replace-match "" nil t))))
+
+
 
 ;; Xml parsing functions
 (defun has-attr (key node)
@@ -54,6 +65,72 @@ by using nxml's indentation rules."
       (backward-char) (insert "\n") (setq end (1+ end)))
     (indent-region begin end))
   (message "Ah, much better!"))
+
+
+;; ASCII function utils for finding non ascii characters in a large block of
+;; text or file
+
+(defun find-first-non-ascii-char ()
+  "Find the first non-ascii character from point onwards."
+  (interactive)
+  (let (point)
+    (save-excursion
+      (setq point
+            (catch 'non-ascii
+              (while (not (eobp))
+                (or (eq (char-charset (following-char))
+                        'ascii)
+                    (throw 'non-ascii (point)))
+                (forward-char 1)))))
+    (if point
+        (goto-char point)
+      (message "No non-ascii characters."))))
+
+(defun find-next-unsafe-char (&optional coding-system)
+  "Find the next character in the buffer that cannot be encoded by
+coding-system. If coding-system is unspecified, default to the coding
+system that would be used to save this buffer. With prefix argument,
+prompt the user for a coding system."
+  (interactive "Zcoding-system: ")
+  (if (stringp coding-system) (setq coding-system (intern coding-system)))
+  (if coding-system nil
+    (setq coding-system
+          (or save-buffer-coding-system buffer-file-coding-system)))
+  (let ((found nil) (char nil) (csets nil) (safe nil))
+    (setq safe (coding-system-get coding-system 'safe-chars))
+    ;; some systems merely specify the charsets as ones they can encode:
+    (setq csets (coding-system-get coding-system 'safe-charsets))
+    (save-excursion
+      ;;(message "zoom to <")
+      (let ((end  (point-max))
+            (here (point    ))
+            (char  nil))
+        (while (and (< here end) (not found))
+          (setq char (char-after here))
+          (if (or (eq safe t)
+                  (< char ?\177)
+                  (and safe  (aref safe char))
+                  (and csets (memq (char-charset char) csets)))
+              nil ;; safe char, noop
+            (setq found (cons here char)))
+          (setq here (1+ here))) ))
+    (and found (goto-char (1+ (car found))))
+    found))
+
+(defun find-unsafe-char-delete ()
+  "Find the next unsafe character for the buffer encoding and delete it, generally this is for
+   removing non ascii characters from a large file"
+  (interactive)
+  (save-excursion
+    (let ((counter 0) )
+      (while (find-next-unsafe-char)
+        (backward-kill-word 1)
+        (setq counter (+ counter 1)))
+      (message "Deleted %d" counter)
+      ))
+  )
+
+
 
 ;; TODO move keybindings to init.el or modes.el this file is for util functions
 ;; only not configurations

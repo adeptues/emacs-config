@@ -95,15 +95,18 @@
 ;; languages need lsp-mode as some have better bespoke tooling. lsp-mnode is for
 ;; when theres existing tooling for other ides that support lsp protocol for
 ;; better integration
-(require 'lsp-mode)
+;;(require 'lsp-mode)
 
 
 ;; Rust mode settings
-(require 'rust-mode)
-(autoload 'rust-mode "rust-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-
-;;TODO LSP Mode and Racer and Clippy
+;; (require 'rust-mode)
+;; (autoload 'rust-mode "rust-mode" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+;; Rustic is a fork of rust mode with enhanced dev env features only
+;; that is required
+(require 'rustic)
+(add-hook 'rustic-hook (lambda () (local-set-key (kbd "M-Enter"))))
+;;(use-package rustic)
 ;; End rust config
 
 
@@ -162,6 +165,10 @@
 (add-hook 'typescript-mode-hook
           (lambda ()
             (local-set-key (kbd "M-RET") `tide-fix)))
+;; Set keybind CTRL-. to find next reference
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-.") `tide-references)))
 ;; End typescript dev config
 
 ;; add typescript tsx formatting to webmode using tide

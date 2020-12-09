@@ -46,6 +46,7 @@
 ;; Our primary entry function for generating sql from a class, reads all the
 ;; nessecary user input
 (defun sql-utils-generate-region ()
+  "Converts a region to sql. the region should be in the format PERMISSION_NAME='ROLE_PERMSSION'"
   (interactive)
   (save-restriction)
   (setq count (string-to-number (read-string "Counter: ") 10));; this is used in a later function as a buffer local var

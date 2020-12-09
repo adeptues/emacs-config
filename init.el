@@ -34,7 +34,7 @@
 ;;                      auto-complete-clang
                       cmake-mode
                       markdown-mode
-                      rust-mode
+;;                      rust-mode
                       haskell-mode
                       lua-mode
                       tidy
@@ -45,7 +45,8 @@
                       company
                       monokai-theme;;sublime esque theme
                       dockerfile-mode
-		      ;; lsp-mode;;provides language server protocol
+                      rustic
+		      ;;lsp-mode;;provides language server protocol
 		      ;; company-lsp
 		      ;; lsp-ui
 		      ))
@@ -106,7 +107,7 @@
  '(compilation-message-face (quote default))
  '(custom-safe-themes
    (quote
-    ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
+    ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
  '(fci-rule-color "#3C3D37")
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
@@ -125,7 +126,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (lsp-ui company-lsp lsp-mode dockerfile-mode monokai-theme tide flycheck ansible tidy lua-mode haskell-mode rust-mode markdown-mode cmake-mode color-theme-solarized f rainbow-delimiters jedi cider clojure-mode web-mode ensime starter-kit-lisp)))
+    (solarized-theme lsp-ui company-lsp lsp-mode dockerfile-mode monokai-theme tide flycheck ansible tidy lua-mode haskell-mode rust-mode markdown-mode cmake-mode color-theme-solarized f rainbow-delimiters jedi cider clojure-mode web-mode ensime starter-kit-lisp)))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
