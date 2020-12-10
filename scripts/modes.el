@@ -104,8 +104,8 @@
 ;; (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 ;; Rustic is a fork of rust mode with enhanced dev env features only
 ;; that is required
-(require 'rustic)
-(add-hook 'rustic-hook (lambda () (local-set-key (kbd "M-Enter"))))
+;;(require 'rustic)
+;;(add-hook 'rustic-hook (lambda () (local-set-key (kbd "M-Enter"))))
 ;;(use-package rustic)
 ;; End rust config
 

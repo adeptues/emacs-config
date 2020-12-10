@@ -20,9 +20,11 @@
 
 ;;packages to install if not installed
 (defvar my-packages '(;;starter-kit-lisp
-;;		      js2-mode
+		      ;; js2-mode
+		      
 		      ;; scala-mode2
-		     ;; ensime
+		      ;; ensime
+		      smex
 		      web-mode
 		      clojure-mode
 		      cider
@@ -74,6 +76,7 @@
 ;; For adding libs that we could not fetch from melpa in the vendors directory
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/flycheck-0.19"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/emacs-livedown"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendors/tidy/tidy.el"))
 
 
 ;; set emacs theme wombat is a dark theme Doesnt work on aquamacs osx
@@ -91,6 +94,7 @@
 ;;be in the scripts directory
 (load-user-files (list "yaml-mode.el"
                        "utils.el"
+		       "tidy.el"
                        "modes.el"
 		       "dom.el"
                        "sql-utils.el"))
