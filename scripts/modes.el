@@ -3,6 +3,9 @@
 
 ;; Mode Configuration
 
+;; General configuration for emacs could be part of better defaults really
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ;; hides ui makes sane defaults
 (require 'better-defaults)
 (require 'smex)
@@ -186,10 +189,10 @@
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
-(require 'find-file-in-project)
+;;(require 'find-file-in-project)
 ;; Configure find-file-in-project
-(setq ffip-use-rust-fd t)
-(global-set-key (kbd "C-x C-F") 'find-file-in-project)
+;; (setq ffip-use-rust-fd 'nill)
+;; (global-set-key (kbd "C-x C-F") 'find-file-in-project)
 
 (require 'idle-highlight-mode)
 (defun my-coding-hook ()
