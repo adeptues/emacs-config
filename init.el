@@ -12,24 +12,24 @@
 ;; configure package managment
 (require 'package)
 (dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
-                  ("marmalade" . "http://marmalade-repo.org/packages/")
+;;                  ("marmalade" . "http://marmalade-repo.org/packages/")
 		  ("melpa-stable" . "https://stable.melpa.org/packages/")
 		  ))
   (add-to-list 'package-archives source))
 (package-initialize)
 
 ;;packages to install if not installed
-(defvar my-packages '(starter-kit-lisp
+(defvar my-packages '(;;starter-kit-lisp
 ;;		      js2-mode
 		      ;; scala-mode2
-		      ensime
+		     ;; ensime
 		      web-mode
 		      clojure-mode
 		      cider
 		      jedi
 		      rainbow-delimiters
                       f;; no idea what this is
-                      color-theme-solarized
+;;                      color-theme-solarized
 ;;                      auto-complete
 ;;                      auto-complete-clang
                       cmake-mode
@@ -37,7 +37,7 @@
 ;;                      rust-mode
                       haskell-mode
                       lua-mode
-                      tidy
+;;                      tidy needs loading manuually
                       ansible
                       flycheck
 ;;                      flycheck-rust
@@ -45,7 +45,7 @@
                       company
                       monokai-theme;;sublime esque theme
                       dockerfile-mode
-                      rustic
+;;                      rustic
 		      ;;lsp-mode;;provides language server protocol
 		      ;; company-lsp
 		      ;; lsp-ui
