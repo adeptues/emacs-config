@@ -3,6 +3,8 @@
 
 ;; Mode Configuration
 
+;; hides ui makes sane defaults
+(require 'better-defaults)
 (require 'smex)
 ;; For some reason the starter kit stoped setting up smex for M-x auto
 ;; comlete
@@ -12,13 +14,16 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;; js2-mode configuration for javscript
-;;(require 'js2-mode)
-;;(require 'ac-js2-mode)
-;;(add-to-list 'auto-mode-alist (cons (rx ".js" eos) 'js2-mode))
-;; auto completion for javascript
-;;(add-hook 'js2-mode-hook 'ac-js2-mode)
-;;(setq ac-js2-evaluate-calls t)
+;; paredit config
+(require 'paredit)
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+    (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+    (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+    (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
 
 ;; Web-mode configuration
 (require 'web-mode)
@@ -181,10 +186,20 @@
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
-;; Configure find-file-in-project which is included by starterkitlisp package
+(require 'find-file-in-project)
+;; Configure find-file-in-project
 (setq ffip-use-rust-fd t)
-(global-set-key (kbd "C-x C-S-F") 'find-file-in-project)
+(global-set-key (kbd "C-x C-F") 'find-file-in-project)
 
-
+(require 'idle-highlight-mode)
+(defun my-coding-hook ()
+  (make-local-variable 'column-number-mode)
+  (column-number-mode t)
+  (if window-system (hl-line-mode t))
+  (idle-highlight-mode t))
+;; enable highight on idle
+(add-hook 'emacs-lisp-mode-hook 'my-coding-hook)
+(add-hook 'ruby-mode-hook 'my-coding-hook)
+(add-hook 'js2-mode-hook 'my-coding-hook)
 (provide 'modes)
 ;;; modes.el ends here
