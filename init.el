@@ -26,8 +26,8 @@
 		      ;; js2-mode
 		      smex
 		      web-mode
-		      clojure-mode
-		      cider
+;;		      clojure-mode
+;;		      cider
 		      jedi
 		      rainbow-delimiters
                       f;; no idea what this is
@@ -57,7 +57,7 @@
 
 ;; support for lsp-mode when emacs > 26
 (when (>= emacs-major-version 26)
-  (setq my-packages (append my-packages (list 'lsp-mode 'company-lsp 'lsp-ui))))
+  (setq my-packages (append my-packages (list 'lsp-mode 'lsp-ui))))
 
 ;; refresh package contents
 (when (not package-archive-contents)
